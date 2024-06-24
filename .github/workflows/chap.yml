@@ -40,6 +40,8 @@ jobs:
 
       - name: Process core dumps with chap
         run: |
+          set +e
+          
           directory="$GITHUB_WORKSPACE" 
           ulimit -c unlimited
 
