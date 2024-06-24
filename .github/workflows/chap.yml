@@ -1,10 +1,10 @@
-name: Process Core Dumps
+name: VMware Chap Runner
 
 on:
   push:
 
 jobs:
-  process-core-dumps:
+  process-vmwarechap:
     runs-on: ubuntu-22.04
 
     steps:
