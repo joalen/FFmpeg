@@ -42,26 +42,27 @@ jobs:
         run: |
           set +e
           
-          directory="$GITHUB_WORKSPACE" 
+          directory="$GITHUB_WORKSPACE"
           ulimit -c unlimited
-
+          
           find "$directory" -name "*.so" -exec sh -c '
               for so_file do
                   "$so_file"
               done
           ' sh {} +
-
+          
           commands=("count" "describe" "dump" "enumerate" "explain" "list" "show" "summarize")
           sub_commands=("allocations" "anchored" "anchorpoints" "externalanchored" "externalanchorpoints" "free" "inaccessible" "leaked" "readonly" "registeranchored" "registeranchorpoints" "rxonly" "stackanchorpoints" "s")
-
+          
           for core_file in /var/lib/apport/coredump/*; do
               if [ -f "$core_file" ]; then
                   for command in "${commands[@]}"; do
                       for sub_command in "${sub_commands[@]}"; do
                           ~/chap/build-chap/chap "$core_file" <<EOF
                           $command $sub_command
-                          EOF
+          EOF
                       done
                   done
               fi
           done
+
