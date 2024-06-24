@@ -30,13 +30,14 @@ jobs:
 
       - name: Clone chap repository and build
         run: |
-          git clone https://github.com/vmware/chap.git
-          cd chap
+          git clone https://github.com/vmware/chap.git >> /tmp/chap
+          pushd /tmp/chap
           git submodule update --init --recursive
           mkdir build-chap
           cd build-chap
           cmake ../
           make
+          popd
 
       - name: Process core dumps with chap
         run: |
@@ -58,7 +59,7 @@ jobs:
               if [ -f "$core_file" ]; then
                   for command in "${commands[@]}"; do
                       for sub_command in "${sub_commands[@]}"; do
-                          ~/chap/build-chap/chap "$core_file" <<EOF
+                          /tmp/chap/build-chap/chap "$core_file" <<EOF
                           $command $sub_command
           EOF
                       done
