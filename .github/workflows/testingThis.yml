@@ -13,8 +13,8 @@ jobs:
 
       - name: Attempt to access /var/lib/apport/coredump
         run: |
-          ls -l /var/lib/apport/coredump || echo "Failed to list /var/lib/apport/coredump"
-
+          ls -l /var/lib/apport
+          
       - name: Print GitHub workspace directory
         run: |
           echo "GitHub workspace directory: $GITHUB_WORKSPACE"
