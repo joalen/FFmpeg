@@ -4,7 +4,7 @@ on:
   push:
 
 jobs:
-  process-vmwarechap:
+  run-vmwarechap:
     runs-on: ubuntu-22.04
 
     steps:
@@ -26,7 +26,7 @@ jobs:
       - name: Install Chap dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y cmake  # Install cmake for building chap
+          sudo apt-get install -y cmake
 
       - name: Clone chap repository and build
         run: |
@@ -38,7 +38,7 @@ jobs:
           cmake ../
           make
 
-      - name: Process core dumps with chap
+      - name: Run VMware Chap Analyzer
         run: |
           set +e
           
@@ -52,7 +52,7 @@ jobs:
           ' sh {} +
           
           commands=("count" "describe" "dump" "enumerate" "explain" "list" "show" "summarize")
-          sub_commands=("allocations" "anchored" "anchorpoints" "externalanchored" "externalanchorpoints" "free" "inaccessible" "leaked" "readonly" "registeranchored" "registeranchorpoints" "rxonly" "stackanchorpoints" "s")
+          sub_commands=("allocations" "anchored" "anchorpoints" "externalanchored" "externalanchorpoints" "free" "inaccessible" "leaked" "readonly" "registeranchored" "registeranchorpoints" "rxonly" "stackanchorpoints")
           
           for core_file in /var/lib/apport/coredump/*; do
               if [ -f "$core_file" ]; then
