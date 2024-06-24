@@ -13,6 +13,11 @@ jobs:
         with:
           ref: be2cabce327b58a549500bbeb3a342530f2573e9
 
+      - name: Install dependencies
+        run: | 
+          sudo apt-get update
+          sudo apt-get install -y nasm yasm
+          
       - name: Build repository 
         run: | 
           ./configure --enable-shared --disable-static
