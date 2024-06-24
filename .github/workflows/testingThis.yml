@@ -1,0 +1,20 @@
+name: Test Access to /var/lib/apport/coredump
+
+on:
+  push:
+
+jobs:
+  test-access:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Attempt to access /var/lib/apport/coredump
+        run: |
+          ls -l /var/lib/apport/coredump || echo "Failed to list /var/lib/apport/coredump"
+
+      - name: Print GitHub workspace directory
+        run: |
+          echo "GitHub workspace directory: $GITHUB_WORKSPACE"
