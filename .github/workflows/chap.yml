@@ -45,7 +45,7 @@ jobs:
 
           find "$directory" -name "*.so" -exec sh -c '
               for so_file do
-                  ./"$so_file"
+                  "$so_file"
               done
           ' sh {} +
 
