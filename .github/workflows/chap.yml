@@ -63,9 +63,10 @@ jobs:
               if [ -f "$core_file" ]; then
                   for command in "${commands[@]}"; do
                       for sub_command in "${sub_commands[@]}"; do
+                          output_file="./chap_results/${core_file##*/}_${command}_${sub_command}.txt"
                           echo "$command + $sub_command"
-                          /tmp/chap/build-chap/chap "$core_file" <<EOF 2>/dev/null
-                          $command $sub_command > "./chap_results/${core_file_chap_results}.txt"
+                          /tmp/chap/build-chap/chap "$core_file" <<EOF >"$output_file" 2>/dev/null
+          $command $sub_command
           EOF
                       done
                   done
