@@ -3874,6 +3874,7 @@ static int open_input_file(InputFile *ifile, const char *filename,
     while ((t = av_dict_iterate(format_opts, t)))
         av_log(NULL, AV_LOG_WARNING, "Option %s skipped - not known to demuxer.\n", t->key);
 
+    /*
     if (find_stream_info) {
         AVDictionary **opts;
         int orig_nb_streams = fmt_ctx->nb_streams;
@@ -3892,9 +3893,9 @@ static int open_input_file(InputFile *ifile, const char *filename,
             print_error(filename, err);
             return err;
         }
-    }
+    }*/
 
-    av_dump_format(fmt_ctx, 0, filename, 0);
+    //av_dump_format(fmt_ctx, 0, filename, 0);
 
     ifile->streams = av_calloc(fmt_ctx->nb_streams, sizeof(*ifile->streams));
     if (!ifile->streams)
